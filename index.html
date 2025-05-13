@@ -78,10 +78,53 @@
     </div>
 
     <div class="mt-6 text-xs sm:text-sm text-white">
-      <p>📧 Contact: <a 
-          class="underline text-yellow-300 hover:text-yellow-400 transition">thearmaandeep@gmail.com</a></p>
+      <p>📧 Contact: 
+        <a id="emailToCopy" 
+           href="javascript:void(0);" 
+           class="underline text-yellow-300 hover:text-yellow-400 transition"
+           onclick="copyEmail()">thearmaandeep@gmail.com</a>
+      </p>
     </div>
   </div>
+
+  <!-- ✅ Toast moved outside the card -->
+  <div id="toast" 
+       style="
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background: #323232;
+          color: #fff;
+          padding: 10px 16px;
+          border-radius: 4px;
+          opacity: 0;
+          transition: opacity 0.4s ease;
+          z-index: 1000;
+       ">
+    Email copied to clipboard 📋
+  </div>
+
+  <script>
+    function copyEmail() {
+      var email = document.getElementById("emailToCopy").innerText;
+      navigator.clipboard.writeText(email)
+        .then(() => {
+          showToast();
+        })
+        .catch(err => {
+          console.error("Failed to copy: ", err);
+        });
+    }
+
+    function showToast() {
+      var toast = document.getElementById("toast");
+      toast.style.opacity = 1;
+
+      setTimeout(() => {
+        toast.style.opacity = 0;
+      }, 2000);
+    }
+  </script>
 </body>
 
 </html>
